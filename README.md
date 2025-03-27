@@ -1,2 +1,2 @@
-# Index.html.
+# prank.html
 Make money fast
