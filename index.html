@@ -81,7 +81,9 @@
                 return;
             }
 
-            document.body.innerHTML = ""; // Clears the page for effect
+            // Hide the input section
+            document.getElementById("content").style.display = "none";
+
             prankUser();
         }
 
@@ -109,17 +111,19 @@
         }
 
         function crashWebsite() {
-            document.body.innerHTML = ''; // Wipe everything
-            let crashScreen = document.getElementById("crashScreen");
-            crashScreen.style.display = "block"; // Show fake error screen
+            document.body.innerHTML = ''; // Clear the screen
+
+            // Create and add the fake crash screen
+            let crashScreen = document.createElement("div");
+            crashScreen.id = "crashScreen";
+            crashScreen.innerHTML = `
+                <h1>:(</h1>
+                <p>Your system has encountered a fatal error.</p>
+                <p>Error Code: 0x000000DEAD</p>
+                <p>Restarting in: NEVER</p>
+            `;
             document.body.appendChild(crashScreen);
+            crashScreen.style.display = "block";
 
             // Freeze interaction
-            document.onkeydown = document.onmousedown = document.onmousemove = function() {
-                return false;
-            };
-        }
-    </script>
-
-</body>
-</html>
+            document.onkeydown
