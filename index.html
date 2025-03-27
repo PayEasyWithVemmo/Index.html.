@@ -81,9 +81,7 @@
                 return;
             }
 
-            // Hide the input section
-            document.getElementById("content").style.display = "none";
-
+            document.getElementById("content").style.display = "none"; // Hide input section
             prankUser();
         }
 
@@ -99,11 +97,11 @@
 
             function showNextMessage() {
                 if (index < messages.length) {
-                    alert(messages[index]);
+                    alert(messages[index]);  // Show pop-up
                     index++;
-                    setTimeout(showNextMessage, 1000); // Show next pop-up after 1 second
+                    setTimeout(showNextMessage, 1000);  // Wait 1 sec before next pop-up
                 } else {
-                    crashWebsite();
+                    setTimeout(crashWebsite, 1000);  // Delay crash for effect
                 }
             }
 
@@ -111,9 +109,7 @@
         }
 
         function crashWebsite() {
-            document.body.innerHTML = ''; // Clear the screen
-
-            // Create and add the fake crash screen
+            document.body.innerHTML = ""; // Clear page
             let crashScreen = document.createElement("div");
             crashScreen.id = "crashScreen";
             crashScreen.innerHTML = `
@@ -125,5 +121,12 @@
             document.body.appendChild(crashScreen);
             crashScreen.style.display = "block";
 
-            // Freeze interaction
-            document.onkeydown
+            // Disable all user interaction
+            document.onkeydown = document.onmousedown = document.onmousemove = function() {
+                return false;
+            };
+        }
+    </script>
+
+</body>
+</html>
