@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scam.com</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+        }
+        #header {
+            background-color: blue;
+            padding: 20px;
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+        }
+        #content {
+            margin-top: 50px;
+        }
+        input[type="email"] {
+            padding: 10px;
+            width: 250px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkred;
+        }
+        /* Fake Crash Screen */
+        #crashScreen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: blue;
+            color: white;
+            text-align: center;
+            font-size: 24px;
+            padding-top: 20%;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="header">Scam.com</div>
+
+    <div id="content">
+        <h2>Enter your email to continue:</h2>
+        <input type="email" id="email" placeholder="your@email.com">
+        <button onclick="startPrank()">Submit</button>
+    </div>
+
+    <div id="crashScreen">
+        <h1>:(</h1>
+        <p>Your system has encountered a fatal error.</p>
+        <p>Error Code: 0x000000DEAD</p>
+        <p>Restarting in: NEVER</p>
+    </div>
+
+    <script>
+        function startPrank() {
+            let email = document.getElementById("email").value;
+            if (email.trim() === "") {
+                alert("Please enter a valid email.");
+                return;
+            }
+
+            document.body.innerHTML = ""; // Clears the page for effect
+            prankUser();
+        }
+
+        function prankUser() {
+            let messages = [
+                "Downloading virus... Please wait...",
+                "Your IP address has been logged.",
+                "Hacking in progress...",
+                "System breach detected!"
+            ];
+
+            let index = 0;
+
+            function showNextMessage() {
+                if (index < messages.length) {
+                    alert(messages[index]);
+                    index++;
+                    setTimeout(showNextMessage, 1000); // Show next pop-up after 1 second
+                } else {
+                    crashWebsite();
+                }
+            }
+
+            showNextMessage();
+        }
+
+        function crashWebsite() {
+            document.body.innerHTML = ''; // Wipe everything
+            let crashScreen = document.getElementById("crashScreen");
+            crashScreen.style.display = "block"; // Show fake error screen
+            document.body.appendChild(crashScreen);
+
+            // Freeze interaction
+            document.onkeydown = document.onmousedown = document.onmousemove = function() {
+                return false;
+            };
+        }
+    </script>
+
+</body>
+</html>
